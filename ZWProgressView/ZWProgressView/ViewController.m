@@ -19,9 +19,8 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    ZWProgressView *progressView = [[ZWProgressView alloc] initWithFrame:CGRectMake((self.view.bounds.size.width - 200) / 2.0f, (self.view.bounds.size.height - 50) / 2.0f, 200, 50)];
+    ZWProgressView *progressView = [[ZWProgressView alloc] initWithFrame:CGRectMake((self.view.bounds.size.width - 200) / 2.0f, (self.view.bounds.size.height - 50) / 2.0f, 200, 50) progressColor:[UIColor colorWithRed:0.0f green:0.0f blue:0.5f alpha:1.0f]];
     progressView.progress = 0.47f;
-    progressView.progressBar.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.5f alpha:1.0f];
     
     [self.view addSubview:progressView];
 }
