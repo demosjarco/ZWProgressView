@@ -158,6 +158,13 @@
             [self addConstraints:containerHeightPadding];
             [self addConstraints:containerWidthPadding];
         }
+        
+        progressBarWidthConstraint.constant = self.progress * self.bounds.size.width;
+        progressBarMaskWidthConstraint.constant = progressBarWidthConstraint.constant;
+        
+        [self layoutIfNeeded];
+        
+        [self updateMask];
     } else {
         self.layer.cornerRadius = 2.0f;
         self.backgroundColor = [UIColor colorWithRed:0.85f green:0.85f blue:0.85f alpha:1.0f];
@@ -174,6 +181,13 @@
             [self addConstraints:containerHeightPadding];
             [self addConstraints:containerWidthPadding];
         }
+        
+        progressBarWidthConstraint.constant = self.progress * self.bounds.size.width - 10.0f;
+        progressBarMaskWidthConstraint.constant = progressBarWidthConstraint.constant;
+        
+        [self layoutIfNeeded];
+        
+        [self updateMask];
     }
 }
 
