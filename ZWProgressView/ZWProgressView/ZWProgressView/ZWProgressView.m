@@ -10,32 +10,53 @@
 
 @implementation ZWProgressView
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame progressColor:(UIColor *)progressColor {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        [self initView];
+        [self initViewWithProgressColor:progressColor];
         [self addAllConstraints];
     }
     return self;
 }
 
-- (void)initView {
+- (void)initViewWithProgressColor:(UIColor *)progressBarFillColor {
     self.layer.cornerRadius = 2.0f;
     self.backgroundColor = [UIColor colorWithRed:0.85f green:0.85f blue:0.85f alpha:1.0f];
-    
-    self.normalTextColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0];
-    self.maskedTextColor = [UIColor whiteColor];
     
     self.container = [[UIView alloc] init];
     self.container.layer.borderWidth = 1.0;
     self.container.layer.borderColor = [UIColor grayColor].CGColor;
     self.container.backgroundColor = [UIColor whiteColor];
+    @autoreleasepool {
+        CGFloat r;
+        CGFloat g;
+        CGFloat b;
+        CGFloat a;
+        [self.container.backgroundColor getRed:&r green:&g blue:&b alpha:&a];
+        if (r > 0.6f || g > 0.6f || b > 0.6f) {
+            self.normalTextColor = [UIColor blackColor];
+        } else {
+            self.normalTextColor = [UIColor whiteColor];
+        }
+    }
     self.container.layer.cornerRadius = 3.0;
     self.container.clipsToBounds = YES;
     
     self.progressBar = [[UIView alloc] init];
-    self.progressBar.backgroundColor = [UIColor colorWithRed:0.2 green:0.3 blue:0.8 alpha:1.0];
+    self.progressBar.backgroundColor = progressBarFillColor;
+    @autoreleasepool {
+        CGFloat r;
+        CGFloat g;
+        CGFloat b;
+        CGFloat a;
+        [self.progressBar.backgroundColor getRed:&r green:&g blue:&b alpha:&a];
+        if (r > 0.6f || g > 0.6f || b > 0.6f) {
+            self.maskedTextColor = [UIColor blackColor];
+        } else {
+            self.maskedTextColor = [UIColor whiteColor];
+        }
+    }
     
     self.progressLabel = [[UILabel alloc] init];
     self.progressLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:30];
