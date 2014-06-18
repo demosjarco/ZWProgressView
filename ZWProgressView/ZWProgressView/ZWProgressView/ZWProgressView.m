@@ -102,9 +102,9 @@
 }
 
 - (void)setProgress:(CGFloat)progress {
-    int percentage = progress * 100;
+    float percentage = progress * 100;
     
-    NSString *strProgress = [[NSString alloc] initWithFormat:@"%d%%", percentage];
+    NSString *strProgress = [[NSString alloc] initWithFormat:@"%.f%%", percentage];
     
     self.progressLabel.text = strProgress;
     self.maskedProgressLabel.text = strProgress;
