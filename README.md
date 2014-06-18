@@ -13,7 +13,7 @@ Setup the ZWProgressView as a normal UIView with a frame.
 ```obj-c
 progressView.progress = 0.47f;
 ```
- the progress value of it to a float value of the percentage (1.0 = 100%, 0.0 = 0%).
+Set the progress value of it to a float value of the percentage (1.0 = 100%, 0.0 = 0%).
 
 Optional
 --------
