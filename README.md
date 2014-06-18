@@ -5,12 +5,15 @@ So I had a quesion on github on how to make a UIProgressView and have a UILabel 
 
 Required
 --------
-Setup the ZWProgressView as a normal UIView with a frame. Then set the progress value of it to a float value of the percentage (1.0 = 100%, 0.0 = 0%).
-
 ```obj-c
 ZWProgressView *progressView = [[ZWProgressView alloc] initWithFrame:CGRectMake(x, y, width, height)];
+```
+Setup the ZWProgressView as a normal UIView with a frame.
+
+```obj-c
 progressView.progress = 0.47f;
 ```
+ the progress value of it to a float value of the percentage (1.0 = 100%, 0.0 = 0%).
 
 Optional
 --------
