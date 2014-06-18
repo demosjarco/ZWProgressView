@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ZWProgressView : UIView {
+    NSArray *containerHeightPadding;
+    NSArray *containerWidthPadding;
+    
     NSLayoutConstraint *progressBarWidthConstraint;
     NSLayoutConstraint *progressBarMaskWidthConstraint;
 }
@@ -27,6 +30,7 @@
 - (void)addAllConstraints;
 - (void)setProgress:(CGFloat)progress;
 - (void)updateMask;
+- (void)setFullscreenMode:(BOOL)fullscreen;
 - (void)setContainerBackgroundColor:(UIColor *)backgroundColor;
 - (void)setProgressBarFillColor:(UIColor *)fillColor;
 

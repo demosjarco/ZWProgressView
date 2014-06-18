@@ -25,11 +25,11 @@
     self.backgroundColor = [UIColor colorWithRed:0.85f green:0.85f blue:0.85f alpha:1.0f];
     
     self.container = [[UIView alloc] init];
-    self.container.layer.borderWidth = 1.0;
+    self.container.layer.borderWidth = 1.0f;
     self.container.layer.borderColor = [UIColor grayColor].CGColor;
     self.container.backgroundColor = [UIColor whiteColor];
     self.normalTextColor = [UIColor blackColor];
-    self.container.layer.cornerRadius = 3.0;
+    self.container.layer.cornerRadius = 3.0f;
     self.container.clipsToBounds = YES;
     
     self.progressBar = [[UIView alloc] init];
@@ -68,15 +68,17 @@
     id views = @{@"container": self.container, @"progressBar": self.progressBar, @"progressLabel": self.progressLabel, @"maskedProgressLabel": self.maskedProgressLabel, @"mask": self.mask};
     
     // container constraint
+    containerHeightPadding = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-5-[container]-5-|" options:0 metrics:nil views:views];
+    containerWidthPadding = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[container]-5-|" options:0 metrics:nil views:views];
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-5-[container]-5-|" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[container]-5-|" options:0 metrics:nil views:views]];
+    [self addConstraints:containerHeightPadding];
+    [self addConstraints:containerWidthPadding];
     
     // progressBar constraint
     
     [self.container addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[progressBar]" options:0 metrics:nil views:views]];
     
-    progressBarWidthConstraint = [NSLayoutConstraint constraintWithItem:self.progressBar attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0];
+    progressBarWidthConstraint = [NSLayoutConstraint constraintWithItem:self.progressBar attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeWidth multiplier:10.0f constant:0];
     
     [self.container addConstraint:progressBarWidthConstraint];
     
@@ -95,7 +97,7 @@
     [self.container addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[mask]" options:0 metrics:nil views:views]];
     [self.container addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[mask]|" options:0 metrics:nil views:views]];
     
-    progressBarMaskWidthConstraint = [NSLayoutConstraint constraintWithItem:self.mask attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0];
+    progressBarMaskWidthConstraint = [NSLayoutConstraint constraintWithItem:self.mask attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeWidth multiplier:10.0f constant:0];
     
     [self.container addConstraint:progressBarMaskWidthConstraint];
 }
@@ -112,7 +114,7 @@
     // subtracting 10 pixel for the |-5-[progressBar]-5-| padding in
     // the constraint for the progresBar
     // ------------------------------------------------------------------
-    progressBarWidthConstraint.constant = progress * (self.bounds.size.width - 10.0);
+    progressBarWidthConstraint.constant = progress * (self.bounds.size.width - 10.0f);
     progressBarMaskWidthConstraint.constant = progressBarWidthConstraint.constant;
     
     [self layoutIfNeeded];
@@ -137,6 +139,42 @@
     CGPathRelease(path);
     
     self.maskedProgressLabel.layer.mask = maskLayer;
+}
+
+- (void)setFullscreenMode:(BOOL)fullscreen {
+    if (fullscreen) {
+        self.layer.cornerRadius = 0.0f;
+        self.backgroundColor = nil;
+        
+        self.container.layer.cornerRadius = 0.0f;
+        
+        @autoreleasepool {
+            [self removeConstraints:containerHeightPadding];
+            [self removeConstraints:containerWidthPadding];
+            
+            id views = @{@"container": self.container, @"progressBar": self.progressBar, @"progressLabel": self.progressLabel, @"maskedProgressLabel": self.maskedProgressLabel, @"mask": self.mask};
+            containerHeightPadding = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[container]-1-|" options:0 metrics:nil views:views];
+            containerWidthPadding = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[container]-1-|" options:0 metrics:nil views:views];
+            [self addConstraints:containerHeightPadding];
+            [self addConstraints:containerWidthPadding];
+        }
+    } else {
+        self.layer.cornerRadius = 2.0f;
+        self.backgroundColor = [UIColor colorWithRed:0.85f green:0.85f blue:0.85f alpha:1.0f];
+        
+        self.container.layer.cornerRadius = 3.0f;
+        
+        @autoreleasepool {
+            [self removeConstraints:containerHeightPadding];
+            [self removeConstraints:containerWidthPadding];
+            
+            id views = @{@"container": self.container, @"progressBar": self.progressBar, @"progressLabel": self.progressLabel, @"maskedProgressLabel": self.maskedProgressLabel, @"mask": self.mask};
+            containerHeightPadding = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-5-[container]-5-|" options:0 metrics:nil views:views];
+            containerWidthPadding = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[container]-5-|" options:0 metrics:nil views:views];
+            [self addConstraints:containerHeightPadding];
+            [self addConstraints:containerWidthPadding];
+        }
+    }
 }
 
 - (void)setContainerBackgroundColor:(UIColor *)backgroundColor {
