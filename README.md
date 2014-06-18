@@ -13,7 +13,7 @@ progressView.progress = 0.47f;
 Optional<br />
 The setContainerBackgroundColor: methods set the background color of the progress bar (the part that hasn't been 'filled' yet).<br />
 The setProgressBarFillColor: method sets the fill color of the progress bar.<br />
-Note: Both methods take an instance of UIColor as a parameter.
+Note: Both methods take an instance of UIColor as a parameter. The text will auto adjust based on the color its on. So if it's on a light color, the text will be black. If it's on a dark color, the text will be white.
 
 ```obj-c
 [progressView setContainerBackgroundColor:[UIColor whiteColor]];
