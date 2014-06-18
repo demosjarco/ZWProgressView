@@ -5,7 +5,7 @@ So I had a quesion on github on how to make a UIProgressView and have a UILabel 
 Required<br />
 Setup the ZWProgressView as a normal UIView with a frame. Then set the progress value of it to a float value of the percentage (1.0 = 100%, 0.0 = 0%).
 
-```Objective-C
+```obj-c
 ZWProgressView *progressView = [[ZWProgressView alloc] initWithFrame:CGRectMake(x, y, width, height)];
 progressView.progress = 0.47f;
 ```
@@ -15,7 +15,7 @@ The setContainerBackgroundColor: methods set the background color of the progres
 The setProgressBarFillColor: method sets the fill color of the progress bar.<br />
 Note: Both methods take an instance of UIColor as a parameter.
 
-```Objective-C
+```obj-c
 [progressView setContainerBackgroundColor:[UIColor whiteColor]];
 [progressView setProgressBarFillColor:[UIColor blueColor]];
 ```
