@@ -14,11 +14,13 @@ progressView.progress = 0.47f;
 
 Optional
 --------
-The setContainerBackgroundColor: methods set the background color of the progress bar (the part that hasn't been 'filled' yet).<br />
+The setFullscreenMode: method removes the 5 pixel padding around the bar and removes the rounding of the bar itself too.<br />
+The setContainerBackgroundColor: method set the background color of the progress bar (the part that hasn't been 'filled' yet).<br />
 The setProgressBarFillColor: method sets the fill color of the progress bar.<br />
 Note: Both methods take an instance of UIColor as a parameter. The text will auto adjust based on the color its on. So if it's on a light color, the text will be black. If it's on a dark color, the text will be white.
 
 ```obj-c
+[progressView setFullscreenMode:NO];
 [progressView setContainerBackgroundColor:[UIColor whiteColor]];
 [progressView setProgressBarFillColor:[UIColor blueColor]];
 ```
