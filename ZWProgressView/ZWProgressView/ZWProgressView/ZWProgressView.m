@@ -10,17 +10,17 @@
 
 @implementation ZWProgressView
 
-- (instancetype)initWithFrame:(CGRect)frame progressColor:(UIColor *)progressColor {
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        [self initViewWithProgressColor:progressColor];
+        [self initView];
         [self addAllConstraints];
     }
     return self;
 }
 
-- (void)initViewWithProgressColor:(UIColor *)progressBarFillColor {
+- (void)initView {
     self.layer.cornerRadius = 2.0f;
     self.backgroundColor = [UIColor colorWithRed:0.85f green:0.85f blue:0.85f alpha:1.0f];
     
@@ -28,35 +28,13 @@
     self.container.layer.borderWidth = 1.0;
     self.container.layer.borderColor = [UIColor grayColor].CGColor;
     self.container.backgroundColor = [UIColor whiteColor];
-    @autoreleasepool {
-        CGFloat r;
-        CGFloat g;
-        CGFloat b;
-        CGFloat a;
-        [self.container.backgroundColor getRed:&r green:&g blue:&b alpha:&a];
-        if (r > 0.6f || g > 0.6f || b > 0.6f) {
-            self.normalTextColor = [UIColor blackColor];
-        } else {
-            self.normalTextColor = [UIColor whiteColor];
-        }
-    }
+    self.normalTextColor = [UIColor blackColor];
     self.container.layer.cornerRadius = 3.0;
     self.container.clipsToBounds = YES;
     
     self.progressBar = [[UIView alloc] init];
-    self.progressBar.backgroundColor = progressBarFillColor;
-    @autoreleasepool {
-        CGFloat r;
-        CGFloat g;
-        CGFloat b;
-        CGFloat a;
-        [self.progressBar.backgroundColor getRed:&r green:&g blue:&b alpha:&a];
-        if (r > 0.6f || g > 0.6f || b > 0.6f) {
-            self.maskedTextColor = [UIColor blackColor];
-        } else {
-            self.maskedTextColor = [UIColor whiteColor];
-        }
-    }
+    self.progressBar.backgroundColor = [UIColor blueColor];
+    self.maskedTextColor = [UIColor whiteColor];
     
     self.progressLabel = [[UILabel alloc] init];
     self.progressLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:30];
@@ -159,6 +137,38 @@
     CGPathRelease(path);
     
     self.maskedProgressLabel.layer.mask = maskLayer;
+}
+
+- (void)setContainerBackgroundColor:(UIColor *)backgroundColor {
+    self.container.backgroundColor = backgroundColor;
+    @autoreleasepool {
+        CGFloat r;
+        CGFloat g;
+        CGFloat b;
+        CGFloat a;
+        [self.container.backgroundColor getRed:&r green:&g blue:&b alpha:&a];
+        if (r > 0.6f || g > 0.6f || b > 0.6f) {
+            self.normalTextColor = [UIColor blackColor];
+        } else {
+            self.normalTextColor = [UIColor whiteColor];
+        }
+    }
+}
+
+- (void)setProgressBarFillColor:(UIColor *)fillColor {
+    self.progressBar.backgroundColor = fillColor;
+    @autoreleasepool {
+        CGFloat r;
+        CGFloat g;
+        CGFloat b;
+        CGFloat a;
+        [self.progressBar.backgroundColor getRed:&r green:&g blue:&b alpha:&a];
+        if (r > 0.6f || g > 0.6f || b > 0.6f) {
+            self.maskedTextColor = [UIColor blackColor];
+        } else {
+            self.maskedTextColor = [UIColor whiteColor];
+        }
+    }
 }
 
 @end

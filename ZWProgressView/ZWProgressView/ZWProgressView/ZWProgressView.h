@@ -23,10 +23,11 @@
 @property (nonatomic, strong) UILabel *maskedProgressLabel;
 @property (nonatomic, strong) UIView *mask;
 
-- (instancetype)initWithFrame:(CGRect)frame progressColor:(UIColor *)progressColor;
-- (void)initViewWithProgressColor:(UIColor *)progressBarFillColor;
+- (void)initView;
 - (void)addAllConstraints;
 - (void)setProgress:(CGFloat)progress;
 - (void)updateMask;
+- (void)setContainerBackgroundColor:(UIColor *)backgroundColor;
+- (void)setProgressBarFillColor:(UIColor *)fillColor;
 
 @end
